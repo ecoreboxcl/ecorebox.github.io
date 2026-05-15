@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECOREBOX — Soluciones Modulares</title>
+  <meta name="description" content="ECOREBOX — Diseño, construcción e instalación de soluciones modulares con panel frigorífico. Cámaras de frío, salas de procesos, oficinas modulares. Todo Chile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal:      #00B4D8;
+      --teal-dk:   #0077A8;
+      --teal-lt:   #E6F9FD;
+      --teal-mid:  rgba(0,180,216,.13);
+      --dark:      #0D1B2A;
+      --dark2:     #152034;
+      --mid:       #4A6074;
+      --light:     #F5F8FA;
+      --border:    #E1E8EF;
+      --white:     #ffffff;
+      --text:      #4A6074;
+      --heading:   #0D1B2A;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 68px;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 16px rgba(0,0,0,.05);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 1.55rem; font-weight: 900; color: var(--dark); letter-spacing: .01em; }
+    .logo-text span { color: var(--teal); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--mid); text-decoration: none; font-size: .88rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-btn { background: var(--teal); color: var(--white); padding: .5rem 1.3rem; border-radius: 5px; font-weight: 700; font-size: .85rem; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; transition: all .2s; box-shadow: 0 3px 14px rgba(0,180,216,.3); }
+    .nav-btn:hover { background: var(--teal-dk); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 120px 5vw 80px;
+      background: var(--white); position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: 52%; background: linear-gradient(150deg, var(--light) 0%, #D9F3FB 100%);
+      clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--teal-lt); border: 1px solid rgba(0,180,216,.3);
+      color: var(--teal-dk); padding: .38rem 1rem; border-radius: 99px;
+      font-size: .78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+      margin-bottom: 1.5rem; animation: up .5s ease both;
+    }
+    .tag-dot { width: 7px; height: 7px; background: var(--teal); border-radius: 50%; }
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3rem, 6.5vw, 5rem); font-weight: 900;
+      line-height: .93; text-transform: uppercase; color: var(--heading);
+      margin-bottom: 1.2rem; animation: up .5s .1s ease both;
+    }
+    h1 em { color: var(--teal); font-style: normal; display: block; }
+    .hero-sub { font-size: 1.05rem; line-height: 1.75; color: var(--text); max-width: 430px; margin-bottom: 2.2rem; animation: up .5s .2s ease both; }
+    .hero-sub strong { color: var(--heading); font-weight: 600; }
+    .actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: up .5s .3s ease both; }
+    .btn-p { display: inline-flex; align-items: center; gap: 8px; background: var(--teal); color: var(--white); padding: .88rem 2rem; border-radius: 5px; font-weight: 700; font-size: .93rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: all .25s; box-shadow: 0 4px 20px rgba(0,180,216,.35); }
+    .btn-p:hover { background: var(--teal-dk); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,180,216,.4); }
+    .btn-g { display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--teal); color: var(--teal); padding: .88rem 2rem; border-radius: 5px; font-weight: 700; font-size: .93rem; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; transition: all .2s; }
+    .btn-g:hover { background: var(--teal-lt); }
+
+    .hero-right { position: relative; z-index: 1; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 1rem; animation: up .6s .15s ease both; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--teal); border-radius: 8px; padding: 1.4rem 1.3rem; box-shadow: 0 2px 14px rgba(0,0,0,.06); }
+    .stat .n { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; font-weight: 900; color: var(--teal); line-height: 1; margin-bottom: .25rem; }
+    .stat .l { font-size: .76rem; color: var(--mid); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+    .badge { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.4rem; display: flex; align-items: center; gap: 1rem; box-shadow: 0 2px 14px rgba(0,0,0,.05); }
+    .badge-ico { width: 42px; height: 42px; background: var(--teal-lt); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .badge-ico svg { width: 22px; height: 22px; color: var(--teal); }
+    .badge strong { color: var(--heading); font-size: .93rem; display: block; margin-bottom: .15rem; }
+    .badge span { color: var(--mid); font-size: .81rem; }
+
+    /* STRIP */
+    .strip { background: var(--dark); padding: .95rem 5vw; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .si { display: flex; align-items: center; gap: .5rem; font-family: 'Barlow Condensed', sans-serif; font-size: .92rem; font-weight: 700; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: .09em; }
+    .si svg { color: var(--teal); flex-shrink: 0; }
+
+    /* SECTIONS */
+    section { padding: 90px 5vw; }
+    .sec-label { font-size: .74rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--teal); margin-bottom: .6rem; display: flex; align-items: center; gap: .6rem; }
+    .sec-label::after { content: ''; width: 28px; height: 2px; background: var(--teal); border-radius: 1px; }
+    .sec-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.9rem, 3.8vw, 2.8rem); font-weight: 900; text-transform: uppercase; color: var(--heading); line-height: 1.05; margin-bottom: .7rem; }
+    .sec-title em { color: var(--teal); font-style: normal; }
+    .sec-sub { color: var(--text); font-size: .98rem; line-height: 1.72; max-width: 500px; }
+
+    /* SERVICES */
+    #servicios { background: var(--light); }
+    .svc-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.8rem; flex-wrap: wrap; gap: 1rem; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .svc-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 2rem 1.8rem 1.8rem; position: relative; overflow: hidden; transition: all .25s; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .svc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--teal); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+    .svc-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,0,0,.1); border-color: rgba(0,180,216,.25); }
+    .svc-card:hover::before { transform: scaleX(1); }
+    .svc-ico { width: 52px; height: 52px; background: var(--teal-lt); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.3rem; }
+    .svc-ico svg { width: 27px; height: 27px; color: var(--teal); }
+    .svc-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.22rem; font-weight: 800; text-transform: uppercase; color: var(--heading); margin-bottom: .65rem; letter-spacing: .02em; }
+    .svc-card p { font-size: .88rem; line-height: 1.65; color: var(--text); }
+    .svc-n { position: absolute; bottom: .9rem; right: 1.2rem; font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; color: rgba(0,180,216,.07); line-height: 1; pointer-events: none; }
+
+    /* NOSOTROS */
+    #nosotros { background: var(--white); }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .illus { background: linear-gradient(135deg, var(--light) 0%, #CBF0FA 100%); border-radius: 16px; min-height: 360px; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(0,180,216,.15); }
+    .illus svg.cube { width: 210px; height: 210px; filter: drop-shadow(0 16px 40px rgba(0,180,216,.18)); }
+    .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .pillar { background: var(--light); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem 1.2rem; transition: all .22s; }
+    .pillar:hover { border-color: var(--teal); background: var(--teal-lt); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,180,216,.1); }
+    .p-ico { width: 40px; height: 40px; background: var(--white); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: .9rem; }
+    .p-ico svg { width: 21px; height: 21px; color: var(--teal); }
+    .pillar h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; font-weight: 800; text-transform: uppercase; color: var(--heading); margin-bottom: .35rem; letter-spacing: .04em; }
+    .pillar p { font-size: .83rem; color: var(--text); line-height: 1.55; }
+
+    /* SECTORES */
+    #sectores { background: var(--dark); }
+    #sectores .sec-title { color: var(--white); }
+    #sectores .sec-sub { color: rgba(255,255,255,.55); }
+    .sec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem; }
+    .sec-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 1.6rem 1.2rem; text-align: center; transition: all .22s; }
+    .sec-card:hover { background: rgba(0,180,216,.1); border-color: rgba(0,180,216,.4); transform: translateY(-3px); }
+    .sec-ico { width: 50px; height: 50px; background: rgba(255,255,255,.06); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto .9rem; }
+    .sec-ico svg { width: 25px; height: 25px; color: var(--teal); }
+    .sec-card span { font-size: .8rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.7); }
+
+    /* CONTACTO */
+    #contacto { background: var(--white); }
+    .ct-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .ct-detail { display: flex; align-items: flex-start; gap: 1rem; margin-top: 1.8rem; }
+    .ct-ico { width: 46px; height: 46px; background: var(--teal-lt); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ct-ico svg { width: 22px; height: 22px; color: var(--teal); }
+    .ct-detail strong { color: var(--heading); font-size: .93rem; display: block; margin-bottom: .2rem; }
+    .ct-detail a, .ct-detail span { color: var(--text); font-size: .9rem; text-decoration: none; }
+    .ct-detail a:hover { color: var(--teal); }
+    .ct-btns { display: flex; flex-direction: column; gap: .9rem; margin-top: 2.2rem; }
+    .cta-wa { display: flex; align-items: center; gap: .9rem; background: #25D366; color: var(--white); padding: 1rem 1.8rem; border-radius: 6px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all .2s; box-shadow: 0 4px 16px rgba(37,211,102,.22); }
+    .cta-wa:hover { background: #1da851; transform: translateY(-2px); }
+    .cta-wa svg, .cta-em svg { width: 21px; height: 21px; }
+    .cta-em { display: flex; align-items: center; gap: .9rem; border: 2px solid var(--teal); color: var(--teal); padding: 1rem 1.8rem; border-radius: 6px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: all .2s; }
+    .cta-em:hover { background: var(--teal-lt); }
+    .coverage { background: var(--dark); border-radius: 12px; padding: 2.5rem 2rem; }
+    .coverage h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.75rem; font-weight: 900; text-transform: uppercase; color: var(--white); margin-bottom: .5rem; }
+    .coverage h3 em { color: var(--teal); font-style: normal; }
+    .coverage p { color: rgba(255,255,255,.55); font-size: .9rem; line-height: 1.65; margin-bottom: 1.5rem; }
+    .regions { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .region { background: rgba(0,180,216,.12); border: 1px solid rgba(0,180,216,.25); color: var(--teal); padding: .28rem .75rem; border-radius: 99px; font-size: .73rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+
+    /* FOOTER */
+    footer { background: var(--dark); border-top: 3px solid var(--teal); padding: 2rem 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .fl { font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem; font-weight: 900; color: var(--white); }
+    .fl span { color: var(--teal); }
+    footer p { color: rgba(255,255,255,.35); font-size: .8rem; }
+    .flinks { display: flex; gap: 1.5rem; }
+    .flinks a { color: rgba(255,255,255,.45); text-decoration: none; font-size: .8rem; transition: color .2s; }
+    .flinks a:hover { color: var(--teal); }
+
+    @keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 900px) {
+      .hero, .why-grid, .ct-wrap { grid-template-columns: 1fr; }
+      .hero-bg { display: none; }
+      .hero-right { padding-left: 0; }
+      .svc-grid { grid-template-columns: 1fr 1fr; }
+      .sec-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .illus { min-height: 260px; }
+    }
+    @media (max-width: 560px) {
+      .svc-grid, .pillars { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="logo">
+    <svg width="36" height="36" viewBox="0 0 48 48" fill="none">
+      <rect x="6" y="20" width="22" height="22" fill="#4A5568"/>
+      <polygon points="6,20 17,10 39,10 28,20" fill="#718096"/>
+      <polygon points="28,20 39,10 39,32 28,42" fill="#2D3748"/>
+      <polygon points="17,31 23,25 29,31 23,37" fill="#00B4D8"/>
+    </svg>
+    <span class="logo-text">ECORE<span>BOX</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#sectores">Sectores</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/56935728165" target="_blank" class="nav-btn">Cotiza Ahora</a>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="tag"><span class="tag-dot"></span>Panel Frigorífico · Todo Chile</div>
+    <h1>Soluciones<em>Modulares</em></h1>
+    <p class="hero-sub">Diseñamos y construimos <strong>cámaras de frío, salas de procesos y módulos industriales</strong> con panel frigorífico de alto rendimiento. Rápido, eficiente y a medida.</p>
+    <div class="actions">
+      <a href="https://wa.me/56935728165?text=Hola%20ECOREBOX%2C%20quisiera%20cotizar." target="_blank" class="btn-p">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.526 5.858L0 24l6.335-1.503A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.012-1.372l-.36-.214-3.732.885.927-3.63-.234-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+        Cotiza por WhatsApp
+      </a>
+      <a href="#servicios" class="btn-g">
+        Ver Servicios
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat"><div class="n">100%</div><div class="l">A medida</div></div>
+      <div class="stat"><div class="n">0</div><div class="l">Residuos</div></div>
+      <div class="stat"><div class="n">6+</div><div class="l">Servicios</div></div>
+      <div class="stat"><div class="n">CL</div><div class="l">Todo Chile</div></div>
+    </div>
+    <div class="badge">
+      <div class="badge-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div><strong>Entrega Rápida</strong><span>Mínimo tiempo de parada en tu operación</span></div>
+    </div>
+    <div class="badge">
+      <div class="badge-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      </div>
+      <div><strong>Sin Obra Civil</strong><span>Modular, limpio y sin complicaciones</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="si"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00B4D8"/></svg>Rápido</div>
+  <div class="si"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00B4D8"/></svg>Eficiente</div>
+  <div class="si"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00B4D8"/></svg>A Medida</div>
+  <div class="si"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00B4D8"/></svg>Sin Residuos</div>
+  <div class="si"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00B4D8"/></svg>Panel Frigorífico</div>
+  <div class="si"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#00B4D8"/></svg>Vamos donde esté el trabajo</div>
+</div>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="svc-header">
+    <div>
+      <div class="sec-label">Lo que hacemos</div>
+      <h2 class="sec-title">Nuestros <em>Servicios</em></h2>
+    </div>
+    <p class="sec-sub">Soluciones integrales desde el diseño hasta la instalación y mantención.</p>
+  </div>
+  <div class="svc-grid">
+    <!-- 1 -->
+    <div class="svc-card">
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M12 8v8M8 12h8"/>
+          <circle cx="12" cy="12" r="2.5" fill="currentColor" opacity=".15"/>
+          <path d="M9.5 9.5l1 1M14.5 14.5l1 1M14.5 9.5l-1 1M9.5 14.5l-1 1" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <h3>Cámaras de Frío</h3>
+      <p>Diseño y construcción de cámaras frigoríficas para conservación de alimentos, farmacéutica y logística. Medidas estándar o completamente a medida.</p>
+      <div class="svc-n">01</div>
+    </div>
+    <!-- 2 -->
+    <div class="svc-card">
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="3" width="20" height="18" rx="2"/>
+          <path d="M8 3v18"/>
+          <path d="M12 8h6M12 12h6M12 16h4"/>
+          <circle cx="5" cy="9" r="1.2" fill="currentColor"/>
+          <circle cx="5" cy="13" r="1.2" fill="currentColor"/>
+          <circle cx="5" cy="17" r="1.2" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>Salas de Procesos</h3>
+      <p>Espacios productivos con exigencias sanitarias (Seremi), curvas sanitarias y terminaciones especiales. Diseño técnico con sello arquitectónico.</p>
+      <div class="svc-n">02</div>
+    </div>
+    <!-- 3 -->
+    <div class="svc-card">
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 21V9l9-6 9 6v12H3z"/>
+          <path d="M9 21V13h6v8"/>
+          <path d="M12 6v3"/>
+        </svg>
+      </div>
+      <h3>Oficinas Modulares</h3>
+      <p>Módulos habitables listos para instalar. Ideales para obras, faenas y empresas en crecimiento. Cómodos, rápidos y completamente personalizables.</p>
+      <div class="svc-n">03</div>
+    </div>
+    <!-- 4 -->
+    <div class="svc-card">
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      </div>
+      <h3>Casetas / Módulos Básicos</h3>
+      <p>Módulos compactos multiuso para guardias, bodegas, vestuarios y más. Entrega inmediata en medidas estándar o personalizadas según tu necesidad.</p>
+      <div class="svc-n">04</div>
+    </div>
+    <!-- 5 -->
+    <div class="svc-card">
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M12 4v16"/>
+          <rect x="8" y="9" width="4" height="6" rx="1" fill="currentColor" opacity=".15"/>
+          <rect x="12" y="9" width="4" height="6" rx="1" fill="currentColor" opacity=".15"/>
+          <circle cx="10" cy="12" r=".8" fill="currentColor"/>
+          <circle cx="14" cy="12" r=".8" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>Puertas Industriales</h3>
+      <p>Puertas frigoríficas, corredizas y andenes de carga. Instalación y mantención incluida para todo tipo de operación industrial en todo Chile.</p>
+      <div class="svc-n">05</div>
+    </div>
+    <!-- 6 -->
+    <div class="svc-card">
+      <div class="svc-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+        </svg>
+      </div>
+      <h3>Mantención y Reparación</h3>
+      <p>Servicio técnico en cámaras, paneles y estructuras modulares existentes. Diagnóstico, reparación y mantención preventiva en todo Chile.</p>
+      <div class="svc-n">06</div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="why-grid">
+    <div class="illus">
+      <svg class="cube" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- shadow -->
+        <ellipse cx="110" cy="195" rx="55" ry="10" fill="rgba(0,180,216,.1)"/>
+        <!-- left face -->
+        <polygon points="20,75 110,30 110,130 20,175" fill="#D9F3FB"/>
+        <!-- right face -->
+        <polygon points="110,30 200,75 200,175 110,130" fill="#A8E6F5"/>
+        <!-- top face -->
+        <polygon points="20,75 110,30 200,75 110,120" fill="#C2EDFA"/>
+        <!-- left face border -->
+        <polygon points="20,75 110,30 110,130 20,175" fill="none" stroke="#00B4D8" stroke-width="1.5"/>
+        <!-- right face border -->
+        <polygon points="110,30 200,75 200,175 110,130" fill="none" stroke="#00B4D8" stroke-width="1.5"/>
+        <!-- top face border -->
+        <polygon points="20,75 110,30 200,75 110,120" fill="none" stroke="#00B4D8" stroke-width="1.5"/>
+        <!-- panel lines left face -->
+        <line x1="20" y1="125" x2="110" y2="80" stroke="#00B4D8" stroke-width=".8" opacity=".4" stroke-dasharray="5 4"/>
+        <line x1="65" y1="152" x2="65" y2="52" stroke="#00B4D8" stroke-width=".8" opacity=".3" stroke-dasharray="5 4"/>
+        <!-- panel lines right face -->
+        <line x1="200" y1="125" x2="110" y2="80" stroke="#00B4D8" stroke-width=".8" opacity=".4" stroke-dasharray="5 4"/>
+        <line x1="155" y1="152" x2="155" y2="52" stroke="#00B4D8" stroke-width=".8" opacity=".3" stroke-dasharray="5 4"/>
+        <!-- core diamond -->
+        <polygon points="110,75 135,110 110,145 85,110" fill="#00B4D8"/>
+        <!-- snowflake -->
+        <line x1="110" y1="83" x2="110" y2="137" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="88" y1="97" x2="132" y2="123" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <line x1="132" y1="97" x2="88" y2="123" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="110" cy="83" r="2.5" fill="white"/>
+        <circle cx="110" cy="137" r="2.5" fill="white"/>
+        <circle cx="88" cy="97" r="2.5" fill="white"/>
+        <circle cx="132" cy="123" r="2.5" fill="white"/>
+        <circle cx="132" cy="97" r="2.5" fill="white"/>
+        <circle cx="88" cy="123" r="2.5" fill="white"/>
+        <!-- corners -->
+        <circle cx="110" cy="30" r="4" fill="#00B4D8"/>
+        <circle cx="20" cy="75" r="4" fill="#00B4D8"/>
+        <circle cx="200" cy="75" r="4" fill="#00B4D8"/>
+        <circle cx="110" cy="120" r="4" fill="#00B4D8" opacity=".6"/>
+        <circle cx="20" cy="175" r="4" fill="#00B4D8"/>
+        <circle cx="200" cy="175" r="4" fill="#00B4D8"/>
+        <circle cx="110" cy="130" r="4" fill="#00B4D8"/>
+      </svg>
+    </div>
+    <div>
+      <div class="sec-label">Por qué elegirnos</div>
+      <h2 class="sec-title">La diferencia <em>ECOREBOX</em></h2>
+      <p class="sec-sub">Somos una empresa chilena especializada en infraestructura modular rápida fabricada con panel frigorífico de alto rendimiento. Atendemos a industrias, pequeñas empresas y emprendimientos que necesitan instalaciones eficientes y listas en tiempo récord. <strong style="color:var(--heading)">Vamos donde esté el trabajo.</strong></p>
+      <div class="pillars">
+        <div class="pillar">
+          <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h4>Rápido</h4><p>Entrega ágil con mínimo tiempo de parada en tu operación.</p>
+        </div>
+        <div class="pillar">
+          <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg></div>
+          <h4>Eficiente</h4><p>Panel frigorífico de alto aislamiento térmico y larga durabilidad.</p>
+        </div>
+        <div class="pillar">
+          <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <h4>A Medida</h4><p>Diseñamos según tu operación, espacio y presupuesto real.</p>
+        </div>
+        <div class="pillar">
+          <div class="p-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <h4>Sin Residuos</h4><p>Construcción limpia, modular y 100% amigable con el entorno.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORES -->
+<section id="sectores">
+  <div class="sec-label">A quién atendemos</div>
+  <h2 class="sec-title">Trabajamos para <em>tu industria</em></h2>
+  <div class="sec-grid">
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+      <span>Industria Alimentaria</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22V12m0 0C12 7 7 4 3 6m9 6c0-5 5-8 9-6"/><path d="M5 20c1-3 4-5 7-5s6 2 7 5"/></svg></div>
+      <span>Agroindustria</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      <span>Supermercados</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+      <span>Logística y Transporte</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+      <span>Farmacéutica y Salud</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+      <span>Centros de Distribución</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <span>Minería y Faenas</span>
+    </div>
+    <div class="sec-card">
+      <div class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <span>Pequeñas Empresas</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="ct-wrap">
+    <div>
+      <div class="sec-label">Hablemos</div>
+      <h2 class="sec-title">Cotiza con <em>nosotros</em></h2>
+      <p class="sec-sub">Sin compromiso. Te respondemos rápido con una propuesta a medida para tu proyecto.</p>
+      <div class="ct-detail">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+        <div><strong>Teléfono / WhatsApp</strong><a href="https://wa.me/56935728165">+569 3572 8165</a></div>
+      </div>
+      <div class="ct-detail">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div><strong>Correo</strong><a href="mailto:contacto.ecorebox@gmail.com">contacto.ecorebox@gmail.com</a></div>
+      </div>
+      <div class="ct-detail">
+        <div class="ct-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><strong>Cobertura</strong><span>Todo Chile — vamos donde esté el trabajo</span></div>
+      </div>
+      <div class="ct-btns">
+        <a href="https://wa.me/56935728165?text=Hola%20ECOREBOX%2C%20quisiera%20cotizar%20una%20soluci%C3%B3n%20modular." target="_blank" class="cta-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.122 1.526 5.858L0 24l6.335-1.503A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.012-1.372l-.36-.214-3.732.885.927-3.63-.234-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+          Escribir por WhatsApp
+        </a>
+        <a href="mailto:contacto.ecorebox@gmail.com" class="cta-em">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviar un correo
+        </a>
+      </div>
+    </div>
+    <div class="coverage">
+      <h3>Atendemos en <em>Todo Chile</em></h3>
+      <p>Desde Arica a Punta Arenas. Si tienes un proyecto, nosotros llegamos. Capacidad para ejecutar obras en cualquier región del país.</p>
+      <div class="regions">
+        <span class="region">Arica</span><span class="region">Tarapacá</span><span class="region">Antofagasta</span>
+        <span class="region">Atacama</span><span class="region">Coquimbo</span><span class="region">Valparaíso</span>
+        <span class="region">Metropolitana</span><span class="region">O'Higgins</span><span class="region">Maule</span>
+        <span class="region">Ñuble</span><span class="region">Biobío</span><span class="region">Araucanía</span>
+        <span class="region">Los Ríos</span><span class="region">Los Lagos</span><span class="region">Aysén</span>
+        <span class="region">Magallanes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fl">ECORE<span>BOX</span></div>
+  <p>© 2025 ECOREBOX — Soluciones Modulares · Panel Frigorífico · Chile</p>
+  <div class="flinks">
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+    <a href="https://wa.me/56935728165" target="_blank">WhatsApp</a>
+  </div>
+</footer>
+
+</body>
+</html>
