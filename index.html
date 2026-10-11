@@ -52,6 +52,8 @@
     { "@type": "Question", "name": "¿Por qué no publican precios?", "acceptedAnswer": { "@type": "Answer", "text": "Cada módulo se cotiza según modelo, nivel, fundación, extras y ubicación. Arma tu configuración y envíanos la referencia por WhatsApp; te respondemos con una propuesta." } },
     { "@type": "Question", "name": "¿Qué incluye cada nivel?", "acceptedAnswer": { "@type": "Answer", "text": "Básico es la cáscara del módulo: paneles, puertas y ventanas según el modelo, hojalatería y terminaciones. Equipado suma instalaciones y equipos. Llave en mano suma el mobiliario." } },
     { "@type": "Question", "name": "¿Hacen medidas especiales?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Los 12 modelos son la base. Sobre 33 m², o con otra distribución, diseñamos el proyecto a medida." } },
+    { "@type": "Question", "name": "¿Cuánto demora?", "acceptedAnswer": { "@type": "Answer", "text": "La fabricación toma de 15 a 20 días hábiles por pack de módulos. Una vez en terreno, la instalación toma de 1 a 5 días por pack. El plazo exacto va en tu cotización." } },
+    { "@type": "Question", "name": "¿Qué fundación necesito?", "acceptedAnswer": { "@type": "Answer", "text": "Depende del módulo y del terreno: radier, base metálica, apoyos de hormigón, bloques o base trasladable. El movimiento de tierra y la nivelación los realiza el cliente; nosotros indicamos la superficie y los niveles necesarios." } },
     { "@type": "Question", "name": "¿En qué zonas instalan?", "acceptedAnswer": { "@type": "Answer", "text": "De Valparaíso a La Araucanía. Otras regiones se evalúan según el proyecto." } }
   ]
 }
@@ -331,6 +333,7 @@ img, video, canvas, .ph { -webkit-user-drag: none; -webkit-touch-callout: none; 
 .pstep b { font-family: var(--mono); font-size: .78rem; color: var(--cian); font-weight: 500; }
 .pstep h3 { font-family: var(--display); font-size: 1.06rem; font-weight: 800; margin: 6px 0 8px; line-height: 1.25; }
 .pstep p { margin: 0; font-size: .92rem; color: var(--gris); }
+.pstep .ptime { display: inline-block; white-space: nowrap; margin: 0 0 8px; padding: 3px 9px; border-radius: 999px; background: rgba(0,0,0,.04); border: 1px solid var(--line); font-family: var(--mono); font-size: .74rem; color: var(--ink); }
 
 /* ---------- sectores y servicios ---------- */
 .sectors-sec { background: var(--fondo); }
@@ -842,7 +845,7 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
       </article>
     </div>
     <div class="fnd">
-      <div class="fnd-head"><h3>Fundaciones</h3><p>La definimos contigo en la visita técnica, según el terreno.</p></div>
+      <div class="fnd-head"><h3>Fundaciones</h3><p>La definimos contigo en la visita técnica, según el terreno. El movimiento de tierra y la nivelación quedan a cargo del cliente.</p></div>
       <div class="fnd-row"><h3><i class="dot" style="--c:#0DA0BC"></i>Cámaras de frío</h3><div class="fnd-opts"><span>Radier existente</span><span>Radier nuevo</span><span>Base metálica</span></div></div>
       <div class="fnd-row"><h3><i class="dot" style="--c:#106582"></i>Salas de proceso</h3><div class="fnd-opts"><span>Radier existente</span><span>Radier nuevo</span><span>Apoyos de hormigón</span></div></div>
       <div class="fnd-row"><h3><i class="dot" style="--c:#49494B"></i>Módulos habitables</h3><div class="fnd-opts"><span>Bloques de hormigón</span><span>Apoyos de hormigón</span><span>Radier</span><span>Base trasladable</span></div></div>
@@ -926,9 +929,9 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
     </div>
     <ol class="proc">
       <li class="pstep"><b>01</b><h3>Configura y cotiza</h3><p>Arma tu módulo aquí o escríbenos por WhatsApp. Te enviamos una propuesta con plazo.</p></li>
-      <li class="pstep"><b>02</b><h3>Visita técnica</h3><p>Revisamos terreno, accesos, fundación y empalmes antes de fabricar.</p></li>
-      <li class="pstep"><b>03</b><h3>Fabricación</h3><p>Preparamos paneles, puertas y equipos con tus colores y terminaciones.</p></li>
-      <li class="pstep"><b>04</b><h3>Montaje</h3><p>Instalamos en tu terreno con equipos especializados en panel, frío, electricidad y sanitario.</p></li>
+      <li class="pstep"><b>02</b><h3>Visita técnica</h3><p>Revisamos terreno, accesos, fundación y empalmes antes de fabricar. Te indicamos la superficie y los niveles que debe tener el terreno.</p></li>
+      <li class="pstep"><b>03</b><h3>Fabricación</h3><span class="ptime">15 a 20 días hábiles</span><p>Por cada pack de módulos. Preparamos paneles, puertas y equipos con tus colores y terminaciones.</p></li>
+      <li class="pstep"><b>04</b><h3>Montaje</h3><span class="ptime">1 a 5 días en terreno</span><p>Por cada pack, una vez que los módulos llegan a tu terreno. Instalamos con equipos especializados en panel, frío, electricidad y sanitario.</p></li>
       <li class="pstep"><b>05</b><h3>Entrega</h3><p>Probamos instalaciones y equipos, y te entregamos el módulo listo para operar.</p></li>
     </ol>
   </div>
@@ -942,7 +945,7 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
         <h2 class="h2"><span class="lt">Trabajamos para</span> <b>tu industria</b></h2>
         <span class="ul"></span>
       </div>
-      <p>Desde el almacén de barrio hasta la faena minera: el mismo panel, dimensionado para cada uso.</p>
+      <p>Desde el almacén de barrio hasta la faena minera, incluso en terrenos aislados, de difícil acceso o en emergencias: el mismo panel, dimensionado para cada uso.</p>
     </div>
     <ul class="sectors">
       <li class="sector"><svg class="ico"><use href="#i-food" /></svg>Industria alimentaria</li>
@@ -971,10 +974,10 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
       <span class="ul"></span>
       <p>ECOREBOX es una empresa chilena que diseña, fabrica e instala espacios modulares de panel aislado. Atendemos a industrias, comercios y emprendimientos que necesitan instalaciones eficientes, con plazos claros y sin la incertidumbre de una obra tradicional. <strong>Vamos donde esté el trabajo.</strong></p>
       <div class="pillars">
-        <div class="pillar"><svg class="ico"><use href="#i-bolt" /></svg><div><h3>Rápido</h3><p>Montaje en seco: menos días de obra y menos tiempo detenido.</p></div></div>
-        <div class="pillar"><svg class="ico"><use href="#i-layers" /></svg><div><h3>Eficiente</h3><p>Panel EPS, PIR o lana de roca según temperatura y uso.</p></div></div>
+        <div class="pillar"><svg class="ico"><use href="#i-bolt" /></svg><div><h3>Rápido</h3><p>Montaje en seco de 1 a 5 días por pack. Útil en faenas aisladas, zonas de difícil acceso y emergencias.</p></div></div>
+        <div class="pillar"><svg class="ico"><use href="#i-layers" /></svg><div><h3>Aislante y seguro</h3><p>Panel EPS, PIR o lana de roca según temperatura y uso. Lana de roca ignífuga donde se exige resistencia al fuego.</p></div></div>
         <div class="pillar"><svg class="ico"><use href="#i-ruler" /></svg><div><h3>A medida</h3><p>Doce modelos base y proyectos especiales para tu operación.</p></div></div>
-        <div class="pillar"><svg class="ico"><use href="#i-leaf" /></svg><div><h3>Limpio</h3><p>Construcción modular con menos residuos en terreno.</p></div></div>
+        <div class="pillar"><svg class="ico"><use href="#i-leaf" /></svg><div><h3>Sustentable</h3><p>Construcción en seco con menos residuos, y alta aislación que reduce el consumo de energía.</p></div></div>
       </div>
     </div>
     <aside class="cover" aria-labelledby="cov-t">
@@ -1018,7 +1021,9 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
       <details><summary>¿Por qué no publican precios?</summary><p>Cada módulo se cotiza según modelo, nivel, fundación, extras y ubicación. Arma tu configuración en el configurador 3D y envíanos la referencia por WhatsApp: te respondemos con una propuesta.</p></details>
       <details><summary>¿Qué incluye cada nivel?</summary><p>Básico es la cáscara del módulo: paneles, puertas y ventanas según el modelo, hojalatería y terminaciones. Equipado suma instalaciones y equipos, como frío, electricidad, climatización o sanitario. Llave en mano suma el mobiliario. El detalle de cada modelo está en su ficha.</p></details>
       <details><summary>¿Hacen medidas especiales?</summary><p>Sí. Los doce modelos son la base. Sobre 33 m², con varias salas o con otra distribución, diseñamos el proyecto a medida.</p></details>
-      <details><summary>¿Qué fundación necesito?</summary><p>Depende del módulo y del terreno: radier existente o nuevo, base metálica, apoyos de hormigón, bloques o base trasladable. La definimos contigo en la visita técnica.</p></details>
+      <details><summary>¿Qué fundación necesito?</summary><p>Depende del módulo y del terreno: radier existente o nuevo, base metálica, apoyos de hormigón, bloques o base trasladable. La definimos contigo en la visita técnica.</p><p>El movimiento de tierra y la nivelación del terreno los realiza el cliente, porque requieren llevar maquinaria a la obra o faena. Nosotros te indicamos la superficie y los niveles necesarios.</p></details>
+      <details><summary>¿Cuánto demora?</summary><p>La fabricación toma de 15 a 20 días hábiles por pack de módulos. Una vez en terreno, la instalación toma de 1 a 5 días por pack. El plazo exacto va en tu cotización.</p></details>
+      <details><summary>¿Son resistentes al fuego?</summary><p>Depende del panel. El EPS es el más usado por su aislación y precio. Donde se exige resistencia al fuego usamos PIR, de mejor comportamiento, o lana de roca, que es ignífuga.</p></details>
       <details><summary>¿Las salas de proceso sirven para la resolución sanitaria?</summary><p>Se terminan con panel sanitario lavable y curvas sanitarias, pensadas para tramitar la resolución sanitaria. La autorización la entrega la Seremi de Salud; como extra, preparamos la carpeta técnica para el trámite.</p></details>
       <details><summary>¿Puedo poner mi marca en el módulo?</summary><p>Sí: logo en vinilo, gráfica o dibujo, color corporativo y señalética. Pruébalo en el paso 05 del configurador: subes tu logo y lo ves en 3D.</p></details>
       <details><summary>¿Se pueden trasladar?</summary><p>Los módulos habitables pueden ir sobre base trasladable, con chasis metálico para moverlos entre faenas. La oficina O-16 tiene 2,30 m de ancho para viajar en camión.</p></details>
