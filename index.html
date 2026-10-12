@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ECOREBOX · Módulos de panel aislado</title>
-<meta name="description" content="Cámaras de frío, salas de proceso y módulos habitables de panel aislado, llave en mano. 12 modelos, 3 niveles y configurador 3D. De Valparaíso a La Araucanía." />
+<meta name="description" content="Cámaras de frío, salas de proceso y módulos habitables de panel aislado, llave en mano. 12 modelos, 3 niveles y configurador 3D. Instalamos en todo Chile." />
 <meta name="theme-color" content="#172329" />
 <link rel="canonical" href="https://ecorebox.store/" />
 <link rel="icon" type="image/png" href="imagenes/icon-ecorebox.png" />
@@ -36,7 +36,7 @@
   "telephone": "+56935728165",
   "email": "contacto.ecorebox@gmail.com",
   "address": { "@type": "PostalAddress", "addressCountry": "CL" },
-  "areaServed": ["Región de Valparaíso", "Región Metropolitana de Santiago", "Región del Libertador General Bernardo O'Higgins", "Región del Maule", "Región de Ñuble", "Región del Biobío", "Región de La Araucanía"],
+  "areaServed": { "@type": "Country", "name": "Chile" },
   "makesOffer": [
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cámaras de frío modulares" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Salas de proceso sanitarias" } },
@@ -54,7 +54,7 @@
     { "@type": "Question", "name": "¿Hacen medidas especiales?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Los 12 modelos son la base. Sobre 33 m², o con otra distribución, diseñamos el proyecto a medida." } },
     { "@type": "Question", "name": "¿Cuánto demora?", "acceptedAnswer": { "@type": "Answer", "text": "La fabricación toma de 15 a 20 días hábiles por pack de módulos. Una vez en terreno, la instalación toma de 1 a 5 días por pack. El plazo exacto va en tu cotización." } },
     { "@type": "Question", "name": "¿Qué fundación necesito?", "acceptedAnswer": { "@type": "Answer", "text": "Depende del módulo y del terreno: radier, base metálica, apoyos de hormigón, bloques o base trasladable. El movimiento de tierra y la nivelación los realiza el cliente; nosotros indicamos la superficie y los niveles necesarios." } },
-    { "@type": "Question", "name": "¿En qué zonas instalan?", "acceptedAnswer": { "@type": "Answer", "text": "De Valparaíso a La Araucanía. Otras regiones se evalúan según el proyecto." } }
+    { "@type": "Question", "name": "¿En qué zonas instalan?", "acceptedAnswer": { "@type": "Answer", "text": "En todo Chile, de Arica a Punta Arenas. El traslado se cotiza según la distancia a tu obra o faena." } }
   ]
 }
 </script>
@@ -608,7 +608,7 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
         <div class="stat"><b>12</b><span>modelos estándar</span></div>
         <div class="stat"><b>3</b><span>niveles de terminación</span></div>
         <div class="stat"><b>2,6 a 33 m²</b><span>o a medida</span></div>
-        <div class="stat"><b>7 regiones</b><span>de Valparaíso a La Araucanía</span></div>
+        <div class="stat"><b>Todo Chile</b><span>de Arica a Punta Arenas</span></div>
       </div>
     </div>
   </div>
@@ -981,14 +981,14 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
       </div>
     </div>
     <aside class="cover" aria-labelledby="cov-t">
-      <h3 id="cov-t"><span class="lt">Cobertura</span> <b>Valparaíso a La Araucanía</b></h3>
-      <p>Instalamos en estas siete regiones. Para otras zonas evaluamos cada proyecto.</p>
+      <h3 id="cov-t"><span class="lt">Cobertura</span> <b>Todo Chile</b></h3>
+      <p>Instalamos en las 16 regiones, de Arica a Punta Arenas. El traslado se cotiza según la distancia a tu obra.</p>
       <ol class="regs" aria-label="Regiones de Chile de norte a sur">
-        <li>Arica y Parinacota</li>
-        <li>Tarapacá</li>
-        <li>Antofagasta</li>
-        <li>Atacama</li>
-        <li>Coquimbo</li>
+        <li class="on">Arica y Parinacota</li>
+        <li class="on">Tarapacá</li>
+        <li class="on">Antofagasta</li>
+        <li class="on">Atacama</li>
+        <li class="on">Coquimbo</li>
         <li class="on">Valparaíso</li>
         <li class="on">Metropolitana</li>
         <li class="on">O&#x27;Higgins</li>
@@ -996,12 +996,12 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
         <li class="on">Ñuble</li>
         <li class="on">Biobío</li>
         <li class="on">La Araucanía</li>
-        <li>Los Ríos</li>
-        <li>Los Lagos</li>
-        <li>Aysén</li>
-        <li>Magallanes</li>
+        <li class="on">Los Ríos</li>
+        <li class="on">Los Lagos</li>
+        <li class="on">Aysén</li>
+        <li class="on">Magallanes</li>
       </ol>
-      <p class="foot">¿Tu proyecto está más al norte o al sur? Escríbenos igual.</p>
+      <p class="foot">¿Dónde está tu proyecto? Escríbenos y coordinamos el traslado.</p>
     </aside>
   </div>
 </section>
@@ -1027,7 +1027,7 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
       <details><summary>¿Las salas de proceso sirven para la resolución sanitaria?</summary><p>Se terminan con panel sanitario lavable y curvas sanitarias, pensadas para tramitar la resolución sanitaria. La autorización la entrega la Seremi de Salud; como extra, preparamos la carpeta técnica para el trámite.</p></details>
       <details><summary>¿Puedo poner mi marca en el módulo?</summary><p>Sí: logo en vinilo, gráfica o dibujo, color corporativo y señalética. Pruébalo en el paso 05 del configurador: subes tu logo y lo ves en 3D.</p></details>
       <details><summary>¿Se pueden trasladar?</summary><p>Los módulos habitables pueden ir sobre base trasladable, con chasis metálico para moverlos entre faenas. La oficina O-16 tiene 2,30 m de ancho para viajar en camión.</p></details>
-      <details><summary>¿En qué zonas instalan?</summary><p>De Valparaíso a La Araucanía. Otras regiones se evalúan según el proyecto.</p></details>
+      <details><summary>¿En qué zonas instalan?</summary><p>En todo Chile, de Arica a Punta Arenas. El traslado se cotiza según la distancia a tu obra o faena.</p></details>
     </div>
     <aside class="faq-cta">
       <h3>¿Tu proyecto es distinto?</h3>
@@ -1049,7 +1049,7 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
       <ul class="ct-list">
         <li><svg class="ico fill"><use href="#i-wa" /></svg><div><small>WhatsApp</small><a href="https://wa.me/56935728165?text=Hola%20ECOREBOX%2C%20quiero%20cotizar%20un%20m%C3%B3dulo." target="_blank" rel="noopener">+56 9 3572 8165</a></div></li>
         <li><svg class="ico"><use href="#i-mail" /></svg><div><small>Correo</small><a href="mailto:contacto.ecorebox@gmail.com">contacto.ecorebox@gmail.com</a></div></li>
-        <li><svg class="ico"><use href="#i-pin" /></svg><div><small>Cobertura</small><span>Valparaíso a La Araucanía</span></div></li>
+        <li><svg class="ico"><use href="#i-pin" /></svg><div><small>Cobertura</small><span>Todo Chile</span></div></li>
       </ul>
       <div class="ct-actions"><a class="btn btn-white" href="https://wa.me/56935728165?text=Hola%20ECOREBOX%2C%20%C2%BFme%20pueden%20enviar%20el%20cat%C3%A1logo%202026%3F" target="_blank" rel="noopener"><svg class="ico"><use href="#i-catalog" /></svg>Pide el catálogo 2026</a></div>
     </div>
@@ -1101,7 +1101,7 @@ dialog.ficha::backdrop { background: rgba(23,35,41,.62); -webkit-backdrop-filter
         <ul>
           <li><a href="https://wa.me/56935728165?text=Hola%20ECOREBOX%2C%20quiero%20cotizar%20un%20m%C3%B3dulo." target="_blank" rel="noopener">WhatsApp +56 9 3572 8165</a></li>
           <li><a href="mailto:contacto.ecorebox@gmail.com">contacto.ecorebox@gmail.com</a></li>
-          <li>Valparaíso a La Araucanía</li>
+          <li>Cobertura en todo Chile</li>
         </ul>
       </div>
     </div>
