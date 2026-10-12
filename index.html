@@ -1295,6 +1295,7 @@ window.ECB3D = (function () {
   function mats(s) {
     return {
       perf: std(s.perf, 0.45, 0.25),
+      door: s.door ? std(s.door, 0.45, 0.25) : null,
       leaf: std(s.panel, 0.5, 0.02),
       roof: std(mix(s.panel, '#C9CDD0', 0.35), 0.75, 0.05),
       base: std('#5A5F63', 0.8, 0.1),
@@ -1340,7 +1341,7 @@ window.ECB3D = (function () {
     switch (op.t) {
       case 'cold':
         frameOpening(g, x, y, w, h, 0.07, M.inox, zf);
-        B(g, w - 0.01, h - 0.01, 0.07, M.leaf, x, y + h / 2, zf + 0.035);
+        B(g, w - 0.01, h - 0.01, 0.07, M.door || M.leaf, x, y + h / 2, zf + 0.035);
         B(g, 0.05, 0.26, 0.05, M.dark, x + w / 2 - 0.12, y + 1.0, zf + 0.095);
         B(g, 0.15, 0.04, 0.05, M.dark, x + w / 2 - 0.17, y + 1.0, zf + 0.125);
         B(g, 0.05, 0.14, 0.05, M.inox, x - w / 2 + 0.03, y + 0.3, zf + 0.095);
@@ -1356,19 +1357,19 @@ window.ECB3D = (function () {
         var n = op.t === 'san2' ? 2 : 1, lw = w / n;
         for (i = 0; i < n; i++) {
           var lx = x - w / 2 + lw * (i + 0.5);
-          B(g, lw - 0.012, h - 0.01, 0.05, M.leaf, lx, y + h / 2, zf + 0.025);
+          B(g, lw - 0.012, h - 0.01, 0.05, M.door || M.leaf, lx, y + h / 2, zf + 0.025);
           B(g, 0.24, 0.34, 0.01, M.glass, lx, y + 1.45, zf + 0.052);
           var hx = n === 2 ? lx + (i === 0 ? lw / 2 - 0.08 : -lw / 2 + 0.08) : lx + lw / 2 - 0.1;
           B(g, 0.03, 0.2, 0.04, M.dark, hx, y + 1.0, zf + 0.07);
         }
         break;
       case 'alu':
-        frameOpening(g, x, y, w, h, 0.06, M.perf, zf);
+        frameOpening(g, x, y, w, h, 0.06, M.door || M.alu, zf);
         if (op.glass) {
-          B(g, w - 0.01, h - 0.01, 0.04, M.perf, x, y + h / 2, zf + 0.02);
+          B(g, w - 0.01, h - 0.01, 0.04, M.door || M.alu, x, y + h / 2, zf + 0.02);
           B(g, w - 0.18, h * 0.55, 0.012, M.glass, x, y + h * 0.63, zf + 0.042);
         } else {
-          B(g, w - 0.01, h - 0.01, 0.045, M.leaf, x, y + h / 2, zf + 0.022);
+          B(g, w - 0.01, h - 0.01, 0.045, M.door || M.leaf, x, y + h / 2, zf + 0.022);
         }
         B(g, 0.03, 0.18, 0.04, M.dark, x + w / 2 - 0.1, y + 1.0, zf + 0.065);
         break;
@@ -2072,7 +2073,7 @@ window.ECB3D = (function () {
   });
 
   // ---------- configurador ----------
-  var C = { code: 'C-16', tier: 'e', fnd: 'rx', extras: [], perf: 'grafito', perfC: '#E8711D', panel: 'blanco', piso: 'epoxico', stripe: false, stripeColor: '#0DA0BC', logoMode: 'logo', comuna: '' };
+  var C = { code: 'C-16', tier: 'e', fnd: 'rx', extras: [], perf: 'grafito', perfC: '#E8711D', door: 'std', doorC: '#E8711D', panel: 'blanco', piso: 'epoxico', stripe: false, stripeColor: '#0DA0BC', logoMode: 'logo', comuna: '' };
   var TABS = ['modelo', 'nivel', 'fundacion', 'extras', 'personaliza'];
   var FND_DEF = { frio: 'rx', salas: 'rx', hab: 'bl' };
   var SHORT = { frio: 'Cámaras', salas: 'Salas', hab: 'Habitables' };
@@ -2088,6 +2089,8 @@ window.ECB3D = (function () {
     if (!D.piso.some(function (p) { return p.id === C.piso; })) C.piso = m.piso;
     if (!/^#[0-9a-f]{6}$/i.test(C.perfC || '')) { C.perfC = '#E8711D'; if (C.perf === 'otro') C.perf = 'grafito'; }
     if (C.perf !== 'otro' && !D.perf.some(function (p) { return p.id === C.perf; })) C.perf = 'grafito';
+    if (!/^#[0-9a-f]{6}$/i.test(C.doorC || '')) { C.doorC = '#E8711D'; if (C.door === 'otro') C.door = 'std'; }
+    if (['std', 'perf', 'otro'].indexOf(C.door) < 0 && !D.perf.some(function (p) { return p.id === C.door; })) C.door = 'std';
     if (!D.panel.some(function (p) { return p.id === C.panel; })) C.panel = 'blanco';
     if (['b', 'e', 'l'].indexOf(C.tier) < 0) C.tier = 'e';
     if (!/^#[0-9a-f]{6}$/i.test(C.stripeColor || '')) C.stripeColor = '#0DA0BC';
@@ -2148,6 +2151,28 @@ window.ECB3D = (function () {
     var on = C.perf === 'otro', v = on ? C.perfC : find(D.perf, C.perf).c;
     return '<label class="sw sw-any' + (on ? ' on' : '') + '" id="perf-any" style="--c:' + v + '"><i><input type="color" id="perf-c" value="' + v.toLowerCase() + '" aria-label="Otro color de perfiles y esquineros"></i>Otro color<br><small id="perf-hex">' + (on ? v.toUpperCase() : 'a elección') + '</small></label>';
   }
+  // la puerta tiene su propio color: estándar (aluminio natural), igual a los perfiles, uno de la paleta o a elección
+  function doorList() {
+    return [{ id: 'std', n: 'Estándar', c: '#D9DDE0', std: true }, { id: 'perf', n: 'Igual a perfiles', c: perfHex() }].concat(D.perf.map(function (o) { return { id: o.id, n: o.n, c: o.c }; }));
+  }
+  function perfHex() { return C.perf === 'otro' ? C.perfC : find(D.perf, C.perf).c; }
+  function doorHex() {
+    if (C.door === 'std') return null;
+    if (C.door === 'perf') return perfHex();
+    if (C.door === 'otro') return C.doorC;
+    return find(D.perf, C.door).c;
+  }
+  function anyDoor() {
+    var on = C.door === 'otro', v = on ? C.doorC : (doorHex() || '#D9DDE0');
+    return '<label class="sw sw-any' + (on ? ' on' : '') + '" id="door-any" style="--c:' + v + '"><i><input type="color" id="door-c" value="' + v.toLowerCase() + '" aria-label="Otro color de la puerta"></i>Otro color<br><small id="door-hex">' + (on ? v.toUpperCase() : 'a elección') + '</small></label>';
+  }
+  function markDoor() {
+    $$('#p-personaliza [data-sw="door"]').forEach(function (b) { b.setAttribute('aria-checked', String(C.door === b.dataset.v)); });
+    var pb = $('#p-personaliza [data-sw="door"][data-v="perf"]'); if (pb) pb.style.setProperty('--c', perfHex());
+    var a = $('#door-any'); if (!a) return;
+    a.classList.toggle('on', C.door === 'otro'); a.style.setProperty('--c', C.doorC);
+    $('#door-hex').textContent = C.door === 'otro' ? C.doorC.toUpperCase() : 'a elección';
+  }
   function markPerf() {
     $$('#p-personaliza [data-sw="perf"]').forEach(function (b) { b.setAttribute('aria-checked', String(C.perf === b.dataset.v)); });
     var a = $('#perf-any'); if (!a) return;
@@ -2157,6 +2182,7 @@ window.ECB3D = (function () {
   function panePers() {
     return '<h3>Personaliza tu módulo</h3>' +
       '<h4>Terminaciones: perfiles y esquineros</h4>' + swatches(D.perf, 'perf', 'Color de perfiles', anyPerf()) + '<p class="note">¿Tu color corporativo no está? Elígelo en «Otro color»: lo igualamos al RAL más cercano y lo confirmamos con muestra.</p>' +
+      '<h4>Color de la puerta</h4>' + swatches(doorList(), 'door', 'Color de la puerta', anyDoor()) + '<p class="note">La puerta no cambia con los perfiles. Estándar es aluminio natural.</p>' +
       '<h4>Color del panel</h4>' + swatches(D.panel, 'panel', 'Color del panel') + '<p class="note">Según disponibilidad del proveedor.</p>' +
       '<h4>Piso</h4>' + swatches(D.piso, 'piso', 'Piso') + '<p class="note">Al elegir piso se abre la vista interior.</p>' +
       '<h4>Tu marca</h4><div class="brandbox">' +
@@ -2179,7 +2205,7 @@ window.ECB3D = (function () {
     $('#p-personaliza').innerHTML = panePers();
     var el = null;
     if (k) el = $('#panel [data-k="' + k + '"]');
-    else if (id && /^(logo-up|logo-demo|logo-del|stripe|perf-c)$/.test(id)) el = $('#' + id) || $('#logo-up');
+    else if (id && /^(logo-up|logo-demo|logo-del|stripe|perf-c|door-c)$/.test(id)) el = $('#' + id) || $('#logo-up');
     if (el) el.focus({ preventScroll: true });
   }
   function setTab(i) {
@@ -2199,6 +2225,12 @@ window.ECB3D = (function () {
       pan: find(D.panel, C.panel), piso: find(D.piso, C.piso)
     };
   }
+  function doorName() {
+    if (C.door === 'std') return 'estándar';
+    if (C.door === 'perf') return 'igual a perfiles';
+    if (C.door === 'otro') return 'color ' + C.doorC.toUpperCase();
+    return find(D.perf, C.door).n.toLowerCase();
+  }
   function lowName(o) { return o.id === 'otro' ? 'color ' + o.c.toUpperCase() : o.n.toLowerCase(); }
   function brandText(lower) {
     var a = [];
@@ -2209,7 +2241,7 @@ window.ECB3D = (function () {
   }
   function refCode() {
     var m = M();
-    var custom = C.perf !== 'grafito' || C.panel !== 'blanco' || C.piso !== m.piso || !!logoImg || C.stripe;
+    var custom = C.perf !== 'grafito' || C.door !== 'std' || C.panel !== 'blanco' || C.piso !== m.piso || !!logoImg || C.stripe;
     return [m.code.replace('-', ''), C.tier.toUpperCase(), C.fnd.toUpperCase()].join('-') + (C.extras.length ? '-X' + C.extras.length : '') + (custom ? '-P' : '');
   }
   function message() {
@@ -2220,7 +2252,7 @@ window.ECB3D = (function () {
       '• Nivel: ' + s.t.name,
       '• Fundación: ' + s.f.name,
       '• Extras: ' + (C.extras.length ? C.extras.join(', ') : 'sin extras'),
-      '• Colores: perfiles ' + lowName(s.perf) + ', panel ' + s.pan.n.toLowerCase() + ', piso ' + s.piso.n.toLowerCase()
+      '• Colores: perfiles ' + lowName(s.perf) + ', puerta ' + doorName() + ', panel ' + s.pan.n.toLowerCase() + ', piso ' + s.piso.n.toLowerCase()
     ];
     if (logoImg || C.stripe) L.push('• Mi marca: ' + brandText(true) + (logoImg ? ' (te envío el archivo por este chat)' : ''));
     var com = $('#comuna').value.trim(); if (com) L.push('• Comuna: ' + com);
@@ -2233,7 +2265,7 @@ window.ECB3D = (function () {
       ['Modelo', m.code + ' ' + m.kind + ' ' + m.name + ' · ' + area(m) + ' m²'],
       ['Nivel', s.t.name], ['Fundación', s.f.name],
       ['Extras', C.extras.length ? C.extras.join(', ') : 'Sin extras'],
-      ['Colores', 'Perfiles ' + lowName(s.perf) + ', panel ' + s.pan.n.toLowerCase() + ', piso ' + s.piso.n.toLowerCase()],
+      ['Colores', 'Perfiles ' + lowName(s.perf) + ', puerta ' + doorName() + ', panel ' + s.pan.n.toLowerCase() + ', piso ' + s.piso.n.toLowerCase()],
       ['Tu marca', brandText(false)]
     ];
     $('#sum').innerHTML = rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
@@ -2246,11 +2278,11 @@ window.ECB3D = (function () {
     var fb = $('#v-fallback'); if (!fb.hidden) fb.style.backgroundImage = "url('imagenes/" + m.img + ".webp')";
   }
   function save() {
-    store.set(KEY, { code: C.code, tier: C.tier, fnd: C.fnd, extras: C.extras, perf: C.perf, perfC: C.perfC, panel: C.panel, piso: C.piso, stripe: C.stripe, stripeColor: C.stripeColor, logoMode: C.logoMode, comuna: $('#comuna').value.trim() });
+    store.set(KEY, { code: C.code, tier: C.tier, fnd: C.fnd, extras: C.extras, perf: C.perf, perfC: C.perfC, door: C.door, doorC: C.doorC, panel: C.panel, piso: C.piso, stripe: C.stripe, stripeColor: C.stripeColor, logoMode: C.logoMode, comuna: $('#comuna').value.trim() });
   }
   function state3D() {
     var s = info();
-    return { code: C.code, model: s.m, tier: C.tier, fnd: C.fnd, extras: C.extras.slice(), perf: s.perf.c, panel: s.pan.c, piso: C.piso, stripe: C.stripe ? C.stripeColor : null, logo: logoImg, logoMode: C.logoMode, interior: interior };
+    return { code: C.code, model: s.m, tier: C.tier, fnd: C.fnd, extras: C.extras.slice(), perf: s.perf.c, door: doorHex(), panel: s.pan.c, piso: C.piso, stripe: C.stripe ? C.stripeColor : null, logo: logoImg, logoMode: C.logoMode, interior: interior };
   }
   function push3D() { if (v3dReady) V.update(state3D()); }
   function light() { normalize(); updateSummary(); updateChip(); save(); push3D(); }
@@ -2295,11 +2327,13 @@ window.ECB3D = (function () {
       light(); return;
     }
     if (t.id === 'stripe') { C.stripe = t.checked; light(); return; }
-    if (t.id === 'perf-c') { C.perf = 'otro'; C.perfC = t.value; markPerf(); light(); return; }
+    if (t.id === 'perf-c') { C.perf = 'otro'; C.perfC = t.value; markPerf(); markDoor(); light(); return; }
+    if (t.id === 'door-c') { C.door = 'otro'; C.doorC = t.value; markDoor(); light(); return; }
     if (t.id === 'stripe-c') { C.stripeColor = t.value; C.stripe = true; var cb = $('#stripe'); if (cb) cb.checked = true; light(); }
   });
   panel.addEventListener('input', function (e) {
-    if (e.target.id === 'perf-c') { C.perf = 'otro'; C.perfC = e.target.value; markPerf(); light(); return; }
+    if (e.target.id === 'perf-c') { C.perf = 'otro'; C.perfC = e.target.value; markPerf(); markDoor(); light(); return; }
+    if (e.target.id === 'door-c') { C.door = 'otro'; C.doorC = e.target.value; markDoor(); light(); return; }
     if (e.target.id === 'stripe-c') { C.stripeColor = e.target.value; C.stripe = true; var cb = $('#stripe'); if (cb) cb.checked = true; light(); }
   });
   $('.steps').addEventListener('keydown', function (e) {
@@ -2323,13 +2357,15 @@ window.ECB3D = (function () {
     var m = M();
     var o = { m: C.code, t: C.tier, f: C.fnd, x: C.extras.map(function (x) { return m.x.indexOf(x); }), p: C.perf, n: C.panel, s: C.piso, c: C.stripe ? C.stripeColor.slice(1) : '', g: C.logoMode === 'grafica' ? 1 : 0 };
     if (C.perf === 'otro') o.pc = C.perfC.slice(1);
+    if (C.door !== 'std') o.d = C.door;
+    if (C.door === 'otro') o.dc = C.doorC.slice(1);
     return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/, '');
   }
   function decodeCfg(str) {
     try {
       var o = JSON.parse(decodeURIComponent(escape(atob(str)))), m = byCode[o.m]; if (!m) return false;
       C.code = o.m; C.tier = o.t; C.fnd = o.f; C.extras = (o.x || []).map(function (i) { return m.x[i]; }).filter(Boolean);
-      C.perf = o.p; if (o.pc) C.perfC = '#' + o.pc; C.panel = o.n; C.piso = o.s; C.stripe = !!o.c; if (o.c) C.stripeColor = '#' + o.c; C.logoMode = o.g ? 'grafica' : 'logo';
+      C.perf = o.p; if (o.pc) C.perfC = '#' + o.pc; C.door = o.d || 'std'; if (o.dc) C.doorC = '#' + o.dc; C.panel = o.n; C.piso = o.s; C.stripe = !!o.c; if (o.c) C.stripeColor = '#' + o.c; C.logoMode = o.g ? 'grafica' : 'logo';
       return true;
     } catch (e) { return false; }
   }
@@ -2408,7 +2444,7 @@ window.ECB3D = (function () {
   if (!fromLink) {
     var saved = store.get(KEY);
     if (saved && typeof saved === 'object') {
-      ['code', 'tier', 'fnd', 'extras', 'perf', 'perfC', 'panel', 'piso', 'stripe', 'stripeColor', 'logoMode'].forEach(function (k) { if (saved[k] != null) C[k] = saved[k]; });
+      ['code', 'tier', 'fnd', 'extras', 'perf', 'perfC', 'door', 'doorC', 'panel', 'piso', 'stripe', 'stripeColor', 'logoMode'].forEach(function (k) { if (saved[k] != null) C[k] = saved[k]; });
       if (saved.comuna) $('#comuna').value = String(saved.comuna).slice(0, 60);
     }
   }
