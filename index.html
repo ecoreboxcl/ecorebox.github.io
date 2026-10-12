@@ -2181,8 +2181,6 @@ window.ECB3D = (function () {
   }
   function panePers() {
     return '<h3>Personaliza tu módulo</h3>' +
-      '<h4>Terminaciones: perfiles y esquineros</h4>' + swatches(D.perf, 'perf', 'Color de perfiles', anyPerf()) + '<p class="note">¿Tu color corporativo no está? Elígelo en «Otro color»: lo igualamos al RAL más cercano y lo confirmamos con muestra.</p>' +
-      '<h4>Color de la puerta</h4>' + swatches(doorList(), 'door', 'Color de la puerta', anyDoor()) + '<p class="note">La puerta no cambia con los perfiles. Estándar es aluminio natural.</p>' +
       '<h4>Color del panel</h4>' + swatches(D.panel, 'panel', 'Color del panel') + '<p class="note">Según disponibilidad del proveedor.</p>' +
       '<h4>Piso</h4>' + swatches(D.piso, 'piso', 'Piso') + '<p class="note">Al elegir piso se abre la vista interior.</p>' +
       '<h4>Tu marca</h4><div class="brandbox">' +
@@ -2194,7 +2192,9 @@ window.ECB3D = (function () {
         '<button type="button" data-lmode="grafica" data-k="lm-grafica" aria-pressed="' + (C.logoMode === 'grafica') + '">Gráfica en todo el muro</button></div>' : '') +
       '<div class="toggle"><label class="toggle" for="stripe"><input type="checkbox" id="stripe"' + (C.stripe ? ' checked' : '') + '> Franja de color corporativo</label>' +
       '<input type="color" id="stripe-c" value="' + C.stripeColor + '" aria-label="Color de la franja"></div>' +
-      '<p class="note">PNG, JPG o SVG. Tu archivo no se sube a internet: solo se usa en tu navegador para la vista 3D.</p></div>';
+      '<p class="note">PNG, JPG o SVG. Tu archivo no se sube a internet: solo se usa en tu navegador para la vista 3D.</p></div>' +
+      '<h4>Terminaciones: perfiles y esquineros</h4>' + swatches(D.perf, 'perf', 'Color de perfiles', anyPerf()) + '<p class="note">¿Tu color corporativo no está? Elígelo en «Otro color»: lo igualamos al RAL más cercano y lo confirmamos con muestra.</p>' +
+      '<h4>Color de la puerta</h4>' + swatches(doorList(), 'door', 'Color de la puerta', anyDoor()) + '<p class="note">La puerta no cambia con los perfiles. Estándar es aluminio natural.</p>';
   }
   function renderPanes() {
     var ae = document.activeElement, k = ae && ae.dataset ? ae.dataset.k : null, id = ae && ae.id;
